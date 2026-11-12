@@ -3,7 +3,6 @@ import discount.*;
 import shape.*;
 
 public class Main {
-    // Code client : il ne connaît que Shape, jamais Rectangle ni Square
     static void printArea(String label, Shape shape) {
         System.out.println(label + " : " + shape.area());
     }

@@ -1,6 +1,5 @@
 package invoice;
 
-/** Calcul du total : seule classe à modifier si une règle de calcul change (TVA, remise...). */
 public class InvoiceCalculator {
     public double calculateTotal(Invoice invoice) {
         double total = 0;
