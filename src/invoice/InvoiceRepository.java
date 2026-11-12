@@ -1,10 +1,8 @@
 package invoice;
 
-
+/** Persistance : seule classe à modifier si le moyen de stockage change. */
 public class InvoiceRepository {
     public void save(Invoice invoice) {
-        // ici : requête SQL, JPA ou écriture dans un fichier
-        System.out.println("Facture " + invoice.getNumber()
-                + " enregistrée (" + invoice.getLines().size() + " lignes).");
+        System.out.println("Facture enregistrée (" + invoice.getItems().size() + " lignes)");
     }
 }

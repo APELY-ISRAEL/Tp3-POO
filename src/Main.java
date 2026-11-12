@@ -14,10 +14,9 @@ public class Main {
         new InvoiceRepository().save(invoice);
 
         System.out.println("--- Remises ---");
-        DiscountService service = new DiscountService();
-        System.out.println("STANDARD : " + service.applyDiscount("STANDARD", 100));
-        System.out.println("VIP : " + service.applyDiscount("VIP", 100));
-        System.out.println("STUDENT : " + service.applyDiscount("STUDENT", 100));
-        System.out.println("INCONNU : " + service.applyDiscount("INCONNU", 100));
+        System.out.println("STANDARD : " + new DiscountService(new StandardDiscount()).applyDiscount(100));
+        System.out.println("VIP : " + new DiscountService(new VipDiscount()).applyDiscount(100));
+        System.out.println("STUDENT : " + new DiscountService(new StudentDiscount()).applyDiscount(100));
+        System.out.println("SENIOR (nouvelle stratégie) : " + new DiscountService(new SeniorDiscount()).applyDiscount(100));
     }
 }

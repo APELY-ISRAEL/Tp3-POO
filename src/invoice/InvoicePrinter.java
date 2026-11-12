@@ -1,8 +1,14 @@
 package invoice;
 
-/** Persistance : seule classe à modifier si le moyen de stockage change. */
-public class InvoiceRepository {
-    public void save(Invoice invoice) {
-        System.out.println("Facture enregistrée (" + invoice.getItems().size() + " lignes)");
+/** Affichage : seule classe à modifier si le format d'affichage change. */
+public class InvoicePrinter {
+    private final InvoiceCalculator calculator;                // reçu par le constructeur
+
+    public InvoicePrinter(InvoiceCalculator calculator) {
+        this.calculator = calculator;
+    }
+
+    public void print(Invoice invoice) {
+        System.out.println("Facture - total : " + calculator.calculateTotal(invoice));
     }
 }
