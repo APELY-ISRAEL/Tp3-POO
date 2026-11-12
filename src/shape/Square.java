@@ -1,16 +1,15 @@
 package shape;
 
-/** AVANT : Square modifie la garantie de Rectangle (violation LSP). */
-public class Square extends Rectangle {
-    @Override
-    public void setWidth(int width) {
-        this.width = width;
-        this.height = width;
+public final class Square implements Shape {
+    private final int side;
+
+    public Square(int side) {
+        if (side <= 0) {
+            throw new IllegalArgumentException("side doit être > 0");
+        }
+        this.side = side;
     }
 
     @Override
-    public void setHeight(int height) {
-        this.width = height;
-        this.height = height;
-    }
+    public int area() { return side * side; }
 }

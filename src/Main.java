@@ -3,6 +3,11 @@ import discount.*;
 import shape.*;
 
 public class Main {
+    // Code client : il ne connaît que Shape, jamais Rectangle ni Square
+    static void printArea(String label, Shape shape) {
+        System.out.println(label + " : " + shape.area());
+    }
+
     public static void main(String[] args) {
         System.out.println("--- Facture ---");
         Invoice invoice = new Invoice();
@@ -21,18 +26,12 @@ public class Main {
         System.out.println("SENIOR (nouvelle stratégie) : " + new DiscountService(new SeniorDiscount()).applyDiscount(100));
 
         System.out.println("--- Formes ---");
-        Rectangle rectangle = new Rectangle();
-        rectangle.setWidth(5);
-        rectangle.setHeight(4);
-        System.out.println("Rectangle 5x4 : " + rectangle.area());
-
-        Square square = new Square();
-        square.setWidth(5);
-        System.out.println("Carré de côté 5 : " + square.area());
-
-        Rectangle surprise = new Square();          // un Square manipulé comme un Rectangle
-        surprise.setWidth(5);
-        surprise.setHeight(4);
-        System.out.println("Square utilisé comme Rectangle 5x4 (attendu 20) : " + surprise.area());
+        printArea("Rectangle 5x4", new Rectangle(5, 4));
+        printArea("Carré de côté 5", new Square(5));
+        try {
+            new Rectangle(0, 4);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Dimension refusée : " + e.getMessage());
+        }
     }
 }
