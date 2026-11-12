@@ -5,29 +5,30 @@ Une application de facturation contenait trois défauts de conception. Chacun a 
 ## Structure du projet
 
 ```
-├── README.md
-├── src/
-│   ├── invoice/
-│   │   ├── Invoice.java            données de la facture (numéro, lignes)
-│   │   ├── InvoiceLine.java        une ligne de facture
-│   │   ├── InvoiceCalculator.java  règles de calcul
+TP3 POO/
+├── .idea/                          généré par IntelliJ (ignoré par Git)
+├── out/                            classes compilées (ignoré par Git)
+├── src/                            code source (Sources Root)
+│   ├── discount/                   Parties C et D (OCP)
+│   │   ├── DiscountService.java    reçoit une DiscountStrategy
+│   │   ├── DiscountStrategy.java   interface : double apply(double amount)
+│   │   ├── SeniorDiscount.java     -15 % (ajoutée par extension)
+│   │   ├── StandardDiscount.java   -5 %
+│   │   ├── StudentDiscount.java    -10 %
+│   │   └── VipDiscount.java        -20 %
+│   ├── invoice/                    Parties A et B (SRP)
+│   │   ├── Invoice.java            données : la liste des montants
+│   │   ├── InvoiceCalculator.java  calcul du total
 │   │   ├── InvoicePrinter.java     affichage
-│   │   └── InvoiceRepository.java  enregistrement
-│   ├── discount/
-│   │   ├── DiscountStrategy.java   contrat commun des remises
-│   │   ├── StandardDiscount.java
-│   │   ├── VipDiscount.java
-│   │   ├── StudentDiscount.java
-│   │   └── DiscountService.java    applique la stratégie reçue
-│   └── shape/
-│       ├── Shape.java              contrat commun des formes
-│       ├── Rectangle.java
-│       └── Square.java
-└── test/
-    ├── Check.java                  assertions simples
-    ├── invoice.InvoiceTest.java
-    ├── DiscountTest.java
-    └── ShapeTest.java
+│   │   └── InvoiceRepository.java  persistance
+│   ├── shape/                      Parties E et F (LSP)
+│   │   ├── Rectangle.java          immuable, dimensions validées
+│   │   ├── Shape.java              interface : int area()
+│   │   └── Square.java             immuable, côté validé
+│   └── Main.java                   scénarios de comparaison avant/après (package par défaut)
+├── .gitignore                      out/, .idea/, *.iml
+├── README.md
+└── TP3 POO.iml                     généré par IntelliJ (ignoré par Git)
 ```
 
 Dépendances : `InvoicePrinter` utilise `InvoiceCalculator` ; `InvoiceCalculator`, `InvoicePrinter` et `InvoiceRepository` utilisent `Invoice`, qui ne dépend d'aucun d'eux. `DiscountService` dépend de `DiscountStrategy`, que les trois remises implémentent. `Rectangle` et `Square` implémentent `Shape` et ne dépendent pas l'un de l'autre.
